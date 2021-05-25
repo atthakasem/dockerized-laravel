@@ -27,6 +27,7 @@ services:
       context: .
       dockerfile: php.dockerfile
     container_name: php
+    user: "1000:1000"
     volumes:
       - ./src:/var/www/html
     networks:
@@ -44,27 +45,6 @@ services:
       MYSQL_DATABASE: 'laravel'
       MYSQL_USER: 'dbuser'
       MYSQL_PASSWORD: 'dbpass'
-    networks:
-      - laravel
-
-  composer:
-    image: composer:2.0
-    container_name: composer
-    volumes:
-      - ./src:/var/www/html
-    working_dir: /var/www/html
-    networks:
-      - laravel
-
-  artisan:
-    build:
-      context: .
-      dockerfile: php.dockerfile
-    container_name: artisan
-    volumes:
-      - ./src:/var/www/html
-    working_dir: /var/www/html
-    entrypoint: ["php", "artisan"]
     networks:
       - laravel
 
