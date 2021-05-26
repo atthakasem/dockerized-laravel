@@ -63,6 +63,7 @@ services:
       context: .
       dockerfile: php.dockerfile
     container_name: phpunit
+    user: "1000:1000"
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
@@ -83,6 +84,7 @@ services:
       context: .
       dockerfile: php.dockerfile
     container_name: scheduler
+    user: "1000:1000"
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
