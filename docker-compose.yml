@@ -9,7 +9,6 @@ services:
     build:
       context: .
       dockerfile: nginx.dockerfile
-    container_name: nginx
     depends_on:
       - php
       - mysql
@@ -26,7 +25,6 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
-    container_name: php
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
@@ -35,7 +33,6 @@ services:
 
   mysql:
     image: mysql:8
-    container_name: mysql
     ports:
       - 4306:3306
     volumes:
@@ -50,7 +47,6 @@ services:
 
   npm:
     image: node:14
-    container_name: npm
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
@@ -62,7 +58,6 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
-    container_name: phpunit
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
@@ -73,7 +68,6 @@ services:
 
   redis:
     image: redis:6-alpine
-    container_name: redis
     ports:
       - 6379:6379
     networks:
@@ -83,7 +77,6 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
-    container_name: scheduler
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
