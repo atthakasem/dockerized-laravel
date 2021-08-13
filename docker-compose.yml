@@ -8,7 +8,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: nginx.dockerfile
+      dockerfile: nginx/nginx.dockerfile
     depends_on:
       - php
       - mysql
@@ -24,7 +24,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: php/php.dockerfile
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
@@ -57,7 +57,7 @@ services:
   phpunit:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: php/php.dockerfile
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
@@ -76,7 +76,7 @@ services:
   scheduler:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: php/php.dockerfile
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
