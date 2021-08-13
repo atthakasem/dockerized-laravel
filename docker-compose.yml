@@ -43,6 +43,17 @@ services:
     networks:
       - laravel
 
+  phpunit:
+    build:
+      context: .
+      dockerfile: php/php.dockerfile
+    user: "1000:1000"
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ["/var/www/html/vendor/bin/phpunit"]
+    networks:
+      - laravel
+
   mysql:
     image: mysql:8
     ports:
@@ -57,29 +68,18 @@ services:
     networks:
       - laravel
 
+  redis:
+    image: redis:6-alpine
+    ports:
+      - 6379:6379
+    networks:
+      - laravel
+
   npm:
     image: node:14
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
     entrypoint: ["npm"]
-    networks:
-      - laravel
-
-  phpunit:
-    build:
-      context: .
-      dockerfile: php/php.dockerfile
-    user: "1000:1000"
-    volumes:
-      - ./src:/var/www/html
-    entrypoint: ["/var/www/html/vendor/bin/phpunit"]
-    networks:
-      - laravel
-
-  redis:
-    image: redis:6-alpine
-    ports:
-      - 6379:6379
     networks:
       - laravel
