@@ -1,6 +1,6 @@
 # Dockerized Laravel
 
-Laravel development with Docker and Docker Compose. The included docker-compose.yml file, Dockerfiles, and config files, set up a LEMP stack powering a Laravel application in the `src` directory.
+LEMP stack development environment using PHP 8.0 and Laravel 8 with Docker and Docker Compose.
 
 ## Installation
 
