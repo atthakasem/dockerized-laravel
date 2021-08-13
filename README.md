@@ -4,7 +4,7 @@ LEMP stack development environment using PHP 8.0 and Laravel 8 with Docker and D
 
 ## Installation
 
-Make sure to clone this project into a WSL directory for vastly improved performance. Then, inside with project directory:
+Make sure to **clone this project into a WSL directory** for vastly improved performance. Then, inside the project directory:
 
 - Build and spin up nginx and its dependent containers:  
 `docker-compose up -d --build nginx`
