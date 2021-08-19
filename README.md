@@ -46,6 +46,11 @@ Therefore, model creation using artisan would look like this:
 
 ### Troubleshooting
 
-In case of an error while trying to run a Service, try (re-)building the Service:
+- In case of an error while trying to run a Service, try (re-)building the Service:  
+    `docker-compose build phpunit`
 
-`docker-compose build phpunit`
+- If an error similar to  
+    ```
+    failed to solve with frontend dockerfile.v0: failed to create LLB definition: rpc error: code = Unknown desc = error getting credentials - err: exit status 1, out: ``
+    ```  
+    occurs when building, run the commands with `sudo`
