@@ -13,7 +13,7 @@ Make sure to **clone this project into a WSL directory** for vastly improved per
 `docker-compose run --rm php composer install`
 
 - Create Laravel's environment file:
-`cp src/.env.example src/.env ; docker-compose run --rm php php artisan key:generate`
+`cp src/.env.example src/.env && docker-compose run --rm php php artisan key:generate`
 
 _optionally_:
 
@@ -53,4 +53,5 @@ Therefore, model creation using artisan would look like this:
     ```
     failed to solve with frontend dockerfile.v0: failed to create LLB definition: rpc error: code = Unknown desc = error getting credentials - err: exit status 1, out: ``
     ```  
-    occurs when building, run the commands with `sudo`
+    occurs when building, run the commands with `sudo` or add your user to the group "docker" using:  
+    `sudo usermod -aG docker $USER`
