@@ -41,10 +41,10 @@ case "$1" in
     unlink) sudo rm -f /usr/local/bin/coma
     ;;
     setup)
-    coma build
-    coma composer install
-    coma env
-    coma npm install
+    coma build && \
+    coma composer install && \
+    coma env && \
+    coma npm install && \
     coma npm run dev
     ;;
     env)
