@@ -1,7 +1,8 @@
 #!/bin/bash
 
+command_name=coma
 web_server=apache
-link_destination=/usr/local/bin/coma
+link_destination=/usr/local/bin/$command_name
 
 case "$1" in
     # Container commands:
@@ -36,16 +37,16 @@ case "$1" in
     ;;
 
     # Other commands:
-    link) sudo ln -s $(pwd)/coma $link_destination
+    link) sudo ln -s $(pwd)/$command_name $link_destination
     ;;
-    unlink) which coma | sudo xargs rm
+    unlink) which $command_name | sudo xargs rm
     ;;
     setup)
-    coma build && \
-    coma composer install && \
-    coma env && \
-    coma npm install && \
-    coma npm run dev
+    $command_name build && \
+    $command_name composer install && \
+    $command_name env && \
+    $command_name npm install && \
+    $command_name npm run dev
     ;;
     env)
     FILE="$(pwd)/src/.env"
@@ -70,8 +71,8 @@ Service commands:
     npm         - Run the npm container
 
 Other commands:
-    link        - Create a coma symlink in /usr/local/bin/
-    unlink      - Delete the coma symlink from the machine
+    link        - Create a $command_name symlink in /usr/local/bin/
+    unlink      - Delete the $command_name symlink from the machine
     setup       - Set up the dev environment by starting containers and installing dependencies
     env         - Create .env from .env.example and generate an app key"
     ;;
