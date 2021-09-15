@@ -6,8 +6,8 @@ LEMP stack development environment using PHP 8.0 and Laravel 8 with Docker and D
 
 Make sure to **clone this project into a WSL directory** for vastly improved performance. Then, inside the project's root directory:
 
-1. Install the container manager "coma" by adding it to your PATH:
-`sudo ln -s "$(pwd)/coma" /usr/local/bin/coma`
+1. Install Coma, the container manager, by creating a symlink:
+`./coma link`
 
 2. Run coma's setup script:
 `coma setup`
@@ -41,6 +41,13 @@ After installation, you want to change the remote url so that project-specific c
 
 Coma was created as an abstraction layer for a less verbose container management experience. All it does is reroute commands to docker-compose.
 Run `coma` for a full list of commands or simply inspect the shell script.
+
+In practice, simply prefix any command that uses a service (like composer, artisan, npm, etc.) with "coma" and the corresponding container will run.
+
+Examples:
+- `coma composer require guzzlehttp/guzzle`
+- `coma artisan make:model MyModel`
+- `coma npm run watch`
 
 ## Docker Compose Services
 
