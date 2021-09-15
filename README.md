@@ -1,6 +1,6 @@
 # Dockerized Laravel
 
-LEMP stack development environment using PHP 8.0 and Laravel 8 with Docker and Docker Compose.
+L[AE]MP stack development environment using PHP 8.0 and Laravel 8 with Docker and Docker Compose.
 
 ## Installation
 
@@ -42,7 +42,7 @@ After installation, you want to change the remote url so that project-specific c
 Coma was created as an abstraction layer for a less verbose container management experience. All it does is reroute commands to docker-compose.
 Run `coma` for a full list of commands or simply inspect the shell script.
 
-In practice, simply prefix any command that uses a service (like composer, artisan, npm, etc.) with "coma" and the corresponding container will run.
+In practice, simply **prefix any command that uses a service with `coma`** and the corresponding container will run.
 
 Examples:
 - `coma composer require guzzlehttp/guzzle`
