@@ -57,22 +57,22 @@ case "$1" in
 
     # Default command:
     *) echo "Container commands:
-    build
-    up
-    down
-    ps
+    build       - (Re)build and start the web server image and its dependents
+    up          - Start the web server container and its dependents
+    down        - Shut down all containers
+    ps          - List running containers
 
 Service commands:
-    composer
-    artisan
-    php
-    phpunit
-    npm
+    composer    - Run the PHP container and call composer
+    artisan     - Run the PHP container and call artisan
+    php         - Run the PHP container
+    phpunit     - Run the PHPUnit container
+    npm         - Run the npm container
 
 Other commands:
-    link
-    unlink
-    setup
-    env"
+    link        - Create a coma symlink in /usr/local/bin/
+    unlink      - Delete the coma symlink from the machine
+    setup       - Set up the dev environment by starting containers and installing dependencies
+    env         - Create .env from .env.example and generate an app key"
     ;;
 esac
