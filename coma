@@ -38,7 +38,7 @@ case "$1" in
     # Other commands:
     link) sudo ln -s "$(pwd)/coma" /usr/local/bin/coma
     ;;
-    unlink) sudo rm -f /usr/local/bin/coma
+    unlink) which coma | sudo xargs rm
     ;;
     setup)
     coma build && \
