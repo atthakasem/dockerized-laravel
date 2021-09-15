@@ -47,18 +47,6 @@ services:
     networks:
       - laravel
 
-  artisan:
-    build:
-      context: .
-      dockerfile: php/php.dockerfile
-    user: "1000:1000"
-    volumes:
-      - ./src:/var/www/html
-    working_dir: /var/www/html
-    entrypoint: ["php", "artisan"]
-    networks:
-      - laravel
-
   phpunit:
     build:
       context: .
