@@ -60,6 +60,7 @@ services:
 
   mysql:
     image: mysql:8
+    user: "1000:1000"
     ports:
       - 4306:3306
     volumes:
