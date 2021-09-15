@@ -1,14 +1,13 @@
 #!/bin/bash
 
-webserver=apache
-
+web_server=apache
 link_destination=/usr/local/bin/coma
 
 case "$1" in
     # Container commands:
-    build) sudo docker-compose up -d --build $webserver
+    build) sudo docker-compose up -d --build $web_server
     ;;
-    up) sudo docker-compose up -d $webserver
+    up) sudo docker-compose up -d $web_server
     ;;
     down) docker-compose down
     ;;
