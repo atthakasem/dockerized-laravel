@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Add this file to your PATH for easier use:
-# sudo ln -s "$(pwd)/coma" /usr/local/bin/coma
+webserver=apache
+
+link_destination=/usr/local/bin/coma
 
 case "$1" in
     # Container commands:
-    build) sudo docker-compose up -d --build apache
+    build) sudo docker-compose up -d --build $webserver
     ;;
-    up) sudo docker-compose up -d apache
+    up) sudo docker-compose up -d $webserver
     ;;
     down) docker-compose down
     ;;
@@ -36,7 +37,7 @@ case "$1" in
     ;;
 
     # Other commands:
-    link) sudo ln -s "$(pwd)/coma" /usr/local/bin/coma
+    link) sudo ln -s $(pwd)/coma $link_destination
     ;;
     unlink) which coma | sudo xargs rm
     ;;
