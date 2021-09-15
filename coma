@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Add this file to your PATH for easier use:
+# sudo ln -s "$(pwd)/coma" /usr/local/bin/coma
+
+case "$1" in
+    # Container commands:
+    build) sudo docker-compose up -d --build apache
+    ;;
+    up) sudo docker-compose up -d apache
+    ;;
+    down) docker-compose down
+    ;;
+    ps) docker-compose ps
+    ;;
+
+    # Service commands:
+    composer)
+    shift
+    sudo docker-compose run --rm php composer "$@"
+    ;;
+    artisan)
+    shift
+    sudo docker-compose run --rm php php artisan "$@"
+    ;;
+    php) shift
+    sudo docker-compose run --rm php "$@"
+    ;;
+    phpunit)
+    shift
+    sudo docker-compose run --rm phpunit "$@"
+    ;;
+    npm)
+    shift
+    sudo docker-compose run --rm npm "$@"
+    ;;
+
+    # Other commands:
+    setup)
+    coma build
+    coma composer install
+    coma env
+    coma npm install
+    coma npm run dev
+    ;;
+    env)
+    FILE="$(pwd)/src/.env"
+    if [ ! -f "$FILE" ]; then
+        cp "$(pwd)/src/.env.example" "$(pwd)/src/.env"
+        docker-compose run --rm php php artisan key:generate
+    fi
+    ;;
+
+    # Default command:
+    *) echo "Container commands:
+    build
+    up
+    down
+    ps
+
+Service commands:
+    composer
+    artisan
+    php
+    phpunit
+    npm
+
+Other commands:
+    setup
+    env"
+    ;;
+esac
