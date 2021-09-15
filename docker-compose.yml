@@ -5,10 +5,10 @@ networks:
     name: laravel
 
 services:
-  nginx:
+  apache:
     build:
       context: .
-      dockerfile: nginx/nginx.dockerfile
+      dockerfile: apache/apache.dockerfile
     depends_on:
       - php
       - mysql
@@ -20,6 +20,22 @@ services:
       - ./src:/var/www/html
     networks:
       - laravel
+
+  # nginx:
+  #   build:
+  #     context: .
+  #     dockerfile: nginx/nginx.dockerfile
+  #   depends_on:
+  #     - php
+  #     - mysql
+  #     - redis
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - ./src:/var/www/html
+  #   networks:
+  #     - laravel
 
   php:
     build:
