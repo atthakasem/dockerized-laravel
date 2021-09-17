@@ -43,6 +43,10 @@ case "$1" in
     shift
     sudo docker-compose run --rm npm "$@"
     ;;
+    enter)
+    shift
+    sudo docker-compose run --rm $1 /bin/sh
+    ;;
 
     # Other commands:
     link) sudo ln -s $(pwd)/$command_name $link_destination
@@ -66,17 +70,18 @@ case "$1" in
 
     # Default command:
     *) echo "Container commands:
-    build       - (Re)build and start the web server image and its dependents
-    up          - Start the web server container and its dependents
-    down        - Shut down all containers
-    ps          - List running containers
+    build           - (Re)build and start the web server image and its dependents
+    up              - Start the web server container and its dependents
+    down            - Shut down all containers
+    ps              - List running containers
 
 Service commands:
-    composer    - Run the PHP container and call composer
-    artisan     - Run the PHP container and call artisan
-    php         - Run the PHP container
-    phpunit     - Run the PHPUnit container
-    npm         - Run the npm container
+    composer        - Run the PHP container and call composer
+    artisan         - Run the PHP container and call artisan
+    php             - Run the PHP container
+    phpunit         - Run the PHPUnit container
+    npm             - Run the npm container
+    shell [SERVICE] - Open the shell of a container
 
 Other commands:
     link        - Create a $command_name symlink in /usr/local/bin/
