@@ -12,7 +12,9 @@ Make sure to **clone this project into a WSL directory** for vastly improved per
 2. Run coma's setup script:
 `coma setup`
 
-You're done! FYI these were the commands that ran during the setup:
+3. Visit http://localhost:8080
+
+FYI these were the commands that ran during the setup:
 
     # Build and spin up the web server and its dependent containers:
     coma build
@@ -28,8 +30,6 @@ You're done! FYI these were the commands that ran during the setup:
 
     # Transpile JS files:
     coma npm run dev
-
-3. Go to http://localhost
 
 ### Changing the git remote url
 
