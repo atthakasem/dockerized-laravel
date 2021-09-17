@@ -1,4 +1,4 @@
-FROM httpd:alpine
+FROM httpd:2-alpine
 
 # Enable mod_rewrite, mod_proxy, mod_proxy_fcgi
 RUN sed -i 's~#LoadModule rewrite_module modules/mod_rewrite.so~LoadModule rewrite_module modules/mod_rewrite.so~g' /usr/local/apache2/conf/httpd.conf
