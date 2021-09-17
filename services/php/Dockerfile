@@ -8,11 +8,15 @@ RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
     && docker-php-ext-enable redis \
     && apk del pcre-dev ${PHPIZE_DEPS}
 
-# Add PHP-FPM config
-ADD www.conf /usr/local/etc/php-fpm.d/www.conf
+# Add PHP-FPM config: TCP
+ADD tcp.conf /usr/local/etc/php-fpm.d/www.conf
+
+# Add PHP-FPM config: UDS
+# ADD uds.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 
 # Create web user and group
-RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
+RUN addgroup -g 1000 laravel
+RUN adduser -G laravel -g laravel -s /bin/sh -D laravel
 
 # Create web directory
 RUN mkdir -p /var/www/html

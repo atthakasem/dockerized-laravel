@@ -8,7 +8,8 @@ RUN sed -i 's~#LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so~LoadModule
 # Add vhost config
 ADD httpd-vhosts.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
 
-# Enable it
+# Enable that config
 RUN sed -i 's~#Include conf/extra/httpd-vhosts.conf~Include conf/extra/httpd-vhosts.conf~g' /usr/local/apache2/conf/httpd.conf
 
+# Create web directory
 RUN mkdir -p /var/www/html

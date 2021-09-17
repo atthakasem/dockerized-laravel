@@ -17,6 +17,7 @@ services:
       - 443:443
     volumes:
       - ./src:/var/www/html
+      - ./services/php/sock:/var/run/php-fpm
     networks:
       - laravel
 
@@ -41,6 +42,7 @@ services:
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
+      - ./services/php/sock:/var/run/php-fpm
     networks:
       - laravel
 
