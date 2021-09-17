@@ -6,6 +6,11 @@ port=8080
 url=http://localhost:$port
 link_destination=/usr/local/bin/$command_name
 
+uds_handler='(SetHandler "proxy:unix:..*)'
+uds_config='(ADD uds.conf ..*)'
+tcp_handler='(SetHandler "proxy:fcgi:..*)'
+tcp_config='(ADD tcp.conf ..*)'
+
 case "$1" in
     # Container commands:
     build)
@@ -67,6 +72,20 @@ case "$1" in
         docker-compose run --rm php php artisan key:generate
     fi
     ;;
+    tcp)
+    sed -i -E "s~.*$tcp_handler~        \1~" services/apache/httpd-vhosts.conf && \
+    sed -i -E "s~.*$tcp_config~\1~" services/php/Dockerfile && \
+    sed -i -E "s~.*$uds_handler~        # \1~" services/apache/httpd-vhosts.conf && \
+    sed -i -E "s~.*$uds_config~# \1~" services/php/Dockerfile && \
+    $command_name build
+    ;;
+    uds)
+    sed -i -E "s~.*$tcp_handler~        # \1~" services/apache/httpd-vhosts.conf && \
+    sed -i -E "s~.*$tcp_config~# \1~" services/php/Dockerfile && \
+    sed -i -E "s~.*$uds_handler~        \1~" services/apache/httpd-vhosts.conf && \
+    sed -i -E "s~.*$uds_config~\1~" services/php/Dockerfile && \
+    $command_name build
+    ;;
 
     # Default command:
     *) echo "Container commands:
@@ -87,6 +106,8 @@ Other commands:
     link        - Create a $command_name symlink in /usr/local/bin/
     unlink      - Delete the $command_name symlink from the machine
     setup       - Set up the dev environment by starting containers and installing dependencies
-    env         - Create .env from .env.example and generate an app key"
+    env         - Create .env from .env.example and generate an app key
+    uds         - Switch to PHP-FPM Unix socket connection
+    tcp         - Switch to PHP-FPM TCP connection"
     ;;
 esac
