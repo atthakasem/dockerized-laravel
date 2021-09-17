@@ -3,17 +3,20 @@
 command_name=coma
 web_server=apache
 port=8080
+url=http://localhost:$port
 link_destination=/usr/local/bin/$command_name
 
 case "$1" in
     # Container commands:
     build)
     sudo docker-compose up -d --build $web_server && \
-    explorer.exe http://localhost:$port
+    echo "$web_server is running: $url" && \
+    explorer.exe $url
     ;;
     up)
     sudo docker-compose up -d $web_server && \
-    explorer.exe http://localhost:$port
+    echo "$web_server is running: $url" && \
+    explorer.exe $url
     ;;
     down) docker-compose down
     ;;
