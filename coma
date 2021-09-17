@@ -43,7 +43,7 @@ case "$1" in
     shift
     sudo docker-compose run --rm npm "$@"
     ;;
-    enter)
+    shell)
     shift
     sudo docker-compose run --rm $1 /bin/sh
     ;;
