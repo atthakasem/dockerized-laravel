@@ -1,6 +1,6 @@
 # Dockerized Laravel
 
-L[AE]MP stack development environment using PHP 8.0 and Laravel 8 with Docker and Docker Compose.
+L[AE]MP stack Laravel development environment for WSL
 
 ## Installation
 
