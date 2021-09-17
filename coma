@@ -63,7 +63,8 @@ case "$1" in
     $command_name composer install && \
     $command_name env ; \
     $command_name npm install && \
-    $command_name npm run dev
+    $command_name npm run dev && \
+    git remote rm origin
     ;;
     env)
     FILE="$(pwd)/src/.env"

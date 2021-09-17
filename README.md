@@ -31,11 +31,8 @@ FYI these were the commands that ran during the setup:
     # Transpile JS files:
     coma npm run dev
 
-### Changing the git remote url
-
-After installation, you want to change the remote url so that project-specific commits are not pushed into this repository.
-
-`git remote set-url origin insert@your.new:remote/url.git`
+    # Remove git remote url:
+    git remote rm origin
 
 ## Coma
 
