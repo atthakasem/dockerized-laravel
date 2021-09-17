@@ -6,7 +6,7 @@ RUN sed -i 's~#LoadModule proxy_module modules/mod_proxy.so~LoadModule proxy_mod
 RUN sed -i 's~#LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so~LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so~g' /usr/local/apache2/conf/httpd.conf
 
 # Add vhost config
-ADD ./apache/httpd-vhosts.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
+ADD httpd-vhosts.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
 
 # Enable it
 RUN sed -i 's~#Include conf/extra/httpd-vhosts.conf~Include conf/extra/httpd-vhosts.conf~g' /usr/local/apache2/conf/httpd.conf

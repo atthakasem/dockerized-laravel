@@ -52,7 +52,7 @@ case "$1" in
     setup)
     $command_name build && \
     $command_name composer install && \
-    $command_name env && \
+    $command_name env ; \
     $command_name npm install && \
     $command_name npm run dev
     ;;

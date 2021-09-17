@@ -7,8 +7,7 @@ networks:
 services:
   apache:
     build:
-      context: .
-      dockerfile: apache/apache.dockerfile
+      context: services/apache
     depends_on:
       - php
       - mysql
@@ -23,8 +22,7 @@ services:
 
   nginx:
     build:
-      context: .
-      dockerfile: nginx/nginx.dockerfile
+      context: services/nginx
     depends_on:
       - php
       - mysql
@@ -39,8 +37,7 @@ services:
 
   php:
     build:
-      context: .
-      dockerfile: php/php.dockerfile
+      context: services/php
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
@@ -49,8 +46,7 @@ services:
 
   phpunit:
     build:
-      context: .
-      dockerfile: php/php.dockerfile
+      context: services/php
     user: "1000:1000"
     volumes:
       - ./src:/var/www/html
@@ -64,7 +60,7 @@ services:
     ports:
       - 4306:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./services/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 'dbpass'
       MYSQL_DATABASE: 'laravel'

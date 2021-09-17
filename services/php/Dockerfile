@@ -9,7 +9,7 @@ RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
     && apk del pcre-dev ${PHPIZE_DEPS}
 
 # Add PHP-FPM config
-ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
+ADD www.conf /usr/local/etc/php-fpm.d/www.conf
 
 # Create web user and group
 RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
