@@ -4,7 +4,7 @@ COMMAND_NAME=coma
 WEB_SERVER=apache
 PORT=8080
 URL=http://localhost:$PORT
-LINK_DESTINATION=/usr/local/bin/$COMMAND_NAME
+INSTALL_DIR=/usr/local/bin/$COMMAND_NAME
 
 UDS_HANDLER='(SetHandler "proxy:unix:..*)'
 UDS_CONFIG='(ADD uds.conf ..*)'
@@ -56,9 +56,16 @@ case "$1" in
     ;;
 
     # Other commands:
-    link) sudo ln -s $(pwd)/$COMMAND_NAME $LINK_DESTINATION
+    install)
+    TARGET=$(pwd)/$COMMAND_NAME
+    if [ -f $INSTALL_DIR ]; then
+        echo "$COMMAND_NAME is already installed in $INSTALL_DIR"
+    else
+        sudo ln -s $TARGET $INSTALL_DIR
+    fi
     ;;
-    unlink) which $COMMAND_NAME | sudo xargs rm
+    uninstall)
+    which $COMMAND_NAME | sudo xargs rm && echo "$COMMAND_NAME successfully uninstalled."
     ;;
     setup)
     $COMMAND_NAME env ; \
@@ -93,26 +100,26 @@ case "$1" in
 
     # Default command:
     *) echo "Container commands:
-    build       (Re)build and start the web server image and its dependents
-    up          Start the web server container and its dependents
-    down        Shut down all containers without removing them
-    remove      Shut down all containers and remove them
-    ps          List running containers
+    build     (Re)build and start the web server image and its dependents
+    up        Start the web server container and its dependents
+    down      Shut down all containers without removing them
+    remove    Shut down all containers and remove them
+    ps        List running containers
 
 Service commands:
-    composer            Run the PHP container and call composer
-    artisan             Run the PHP container and call artisan
-    php                 Run the PHP container
-    phpunit             Run the PHPUnit container
-    npm                 Run the npm container
-    shell [SERVICE]     Open the shell of a container
+    composer           Run the PHP container and call composer
+    artisan            Run the PHP container and call artisan
+    php                Run the PHP container
+    phpunit            Run the PHPUnit container
+    npm                Run the npm container
+    shell [SERVICE]    Open the shell of a container
 
 Other commands:
-    link        Create a $COMMAND_NAME symlink in /usr/local/bin/
-    unlink      Delete the $COMMAND_NAME symlink from the machine
-    setup       Set up the dev environment by starting containers and installing dependencies
-    env         Create .env from .env.example and generate an app key
-    uds         Switch to PHP-FPM Unix socket connection
-    tcp         Switch to PHP-FPM TCP connection"
+    install      Create a $COMMAND_NAME symlink in /usr/local/bin/
+    uninstall    Delete the $COMMAND_NAME symlink from the machine
+    setup        Set up the dev environment by starting containers and installing dependencies
+    env          Create .env from .env.example and generate an app key
+    uds          Switch to PHP-FPM Unix socket connection
+    tcp          Switch to PHP-FPM TCP connection"
     ;;
 esac

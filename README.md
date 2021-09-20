@@ -6,8 +6,8 @@ L[AE]MP stack Laravel development environment for WSL
 
 Make sure to **clone this project into a WSL directory** for vastly improved performance. Then, inside the project's root directory:
 
-1. Install Coma, the container manager, by creating a symlink:
-`./coma link`
+1. Install Coma, the container manager:
+`./coma install`
 
 2. Run coma's setup script:
 `coma setup`
