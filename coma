@@ -69,9 +69,10 @@ case "$1" in
     git remote rm origin &> /dev/null
     ;;
     env)
-    FILE="$(pwd)/src/.env"
-    if [ ! -f "$FILE" ]; then
-        cp "$(pwd)/src/.env.example" "$(pwd)/src/.env"
+    env_real="$(pwd)/src/.env"
+    env_example="$(pwd)/src/.env.example"
+    if [ ! -f $env_real ]; then
+        cp $env_example $env_real
         docker-compose run --rm php php artisan key:generate
     fi
     ;;
