@@ -23,7 +23,9 @@ case "$1" in
     echo "$web_server is running: $url" && \
     explorer.exe $url
     ;;
-    down) docker-compose down
+    down) docker-compose stop
+    ;;
+    remove) docker-compose down
     ;;
     ps) docker-compose ps
     ;;
@@ -92,7 +94,8 @@ case "$1" in
     *) echo "Container commands:
     build           - (Re)build and start the web server image and its dependents
     up              - Start the web server container and its dependents
-    down            - Shut down all containers
+    down            - Shut down all containers without removing them
+    remove          - Shut down all containers and remove them
     ps              - List running containers
 
 Service commands:
