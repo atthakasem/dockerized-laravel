@@ -1,27 +1,27 @@
 #!/bin/bash
 
-command_name=coma
-web_server=apache
-port=8080
-url=http://localhost:$port
-link_destination=/usr/local/bin/$command_name
+COMMAND_NAME=coma
+WEB_SERVER=apache
+PORT=8080
+URL=http://localhost:$PORT
+LINK_DESTINATION=/usr/local/bin/$COMMAND_NAME
 
-uds_handler='(SetHandler "proxy:unix:..*)'
-uds_config='(ADD uds.conf ..*)'
-tcp_handler='(SetHandler "proxy:fcgi:..*)'
-tcp_config='(ADD tcp.conf ..*)'
+UDS_HANDLER='(SetHandler "proxy:unix:..*)'
+UDS_CONFIG='(ADD uds.conf ..*)'
+TCP_HANDLER='(SetHandler "proxy:fcgi:..*)'
+TCP_CONFIG='(ADD tcp.conf ..*)'
 
 case "$1" in
     # Container commands:
     build)
-    sudo docker-compose up -d --build $web_server && \
-    echo "$web_server is running: $url" && \
-    explorer.exe $url
+    sudo docker-compose up -d --build $WEB_SERVER && \
+    echo "$WEB_SERVER is running: $URL" && \
+    explorer.exe $URL
     ;;
     up)
-    docker-compose up -d $web_server && \
-    echo "$web_server is running: $url" && \
-    explorer.exe $url
+    docker-compose up -d $WEB_SERVER && \
+    echo "$WEB_SERVER is running: $URL" && \
+    explorer.exe $URL
     ;;
     down) docker-compose stop
     ;;
@@ -56,39 +56,39 @@ case "$1" in
     ;;
 
     # Other commands:
-    link) sudo ln -s $(pwd)/$command_name $link_destination
+    link) sudo ln -s $(pwd)/$COMMAND_NAME $LINK_DESTINATION
     ;;
-    unlink) which $command_name | sudo xargs rm
+    unlink) which $COMMAND_NAME | sudo xargs rm
     ;;
     setup)
-    $command_name env ; \
-    $command_name build ; \
-    $command_name composer install && \
-    $command_name npm install && \
-    $command_name npm run dev && \
+    $COMMAND_NAME env ; \
+    $COMMAND_NAME build ; \
+    $COMMAND_NAME composer install && \
+    $COMMAND_NAME npm install && \
+    $COMMAND_NAME npm run dev && \
     git remote rm origin &> /dev/null
     ;;
     env)
-    env_real="$(pwd)/src/.env"
-    env_example="$(pwd)/src/.env.example"
-    if [ ! -f $env_real ]; then
-        cp $env_example $env_real
+    ENV_REAL="$(pwd)/src/.env"
+    ENV_EXAMPLE="$(pwd)/src/.env.example"
+    if [ ! -f $ENV_REAL ]; then
+        cp $ENV_EXAMPLE $ENV_REAL
         docker-compose run --rm php php artisan key:generate
     fi
     ;;
     tcp)
-    sed -i -E "s~.*$tcp_handler~        \1~" services/apache/httpd-vhosts.conf && \
-    sed -i -E "s~.*$tcp_config~\1~" services/php/Dockerfile && \
-    sed -i -E "s~.*$uds_handler~        # \1~" services/apache/httpd-vhosts.conf && \
-    sed -i -E "s~.*$uds_config~# \1~" services/php/Dockerfile && \
-    $command_name build
+    sed -i -E "s~.*$TCP_HANDLER~        \1~" services/apache/httpd-vhosts.conf && \
+    sed -i -E "s~.*$TCP_CONFIG~\1~" services/php/Dockerfile && \
+    sed -i -E "s~.*$UDS_HANDLER~        # \1~" services/apache/httpd-vhosts.conf && \
+    sed -i -E "s~.*$UDS_CONFIG~# \1~" services/php/Dockerfile && \
+    $COMMAND_NAME build
     ;;
     uds)
-    sed -i -E "s~.*$tcp_handler~        # \1~" services/apache/httpd-vhosts.conf && \
-    sed -i -E "s~.*$tcp_config~# \1~" services/php/Dockerfile && \
-    sed -i -E "s~.*$uds_handler~        \1~" services/apache/httpd-vhosts.conf && \
-    sed -i -E "s~.*$uds_config~\1~" services/php/Dockerfile && \
-    $command_name build
+    sed -i -E "s~.*$TCP_HANDLER~        # \1~" services/apache/httpd-vhosts.conf && \
+    sed -i -E "s~.*$TCP_CONFIG~# \1~" services/php/Dockerfile && \
+    sed -i -E "s~.*$UDS_HANDLER~        \1~" services/apache/httpd-vhosts.conf && \
+    sed -i -E "s~.*$UDS_CONFIG~\1~" services/php/Dockerfile && \
+    $COMMAND_NAME build
     ;;
 
     # Default command:
@@ -108,8 +108,8 @@ Service commands:
     shell [SERVICE]     Open the shell of a container
 
 Other commands:
-    link        Create a $command_name symlink in /usr/local/bin/
-    unlink      Delete the $command_name symlink from the machine
+    link        Create a $COMMAND_NAME symlink in /usr/local/bin/
+    unlink      Delete the $COMMAND_NAME symlink from the machine
     setup       Set up the dev environment by starting containers and installing dependencies
     env         Create .env from .env.example and generate an app key
     uds         Switch to PHP-FPM Unix socket connection
