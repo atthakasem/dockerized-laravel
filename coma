@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMAND_NAME=coma
+COMMAND_NAME=`basename $0`
 WEB_SERVER=apache
 PORT=8080
 URL=http://localhost:$PORT
@@ -62,6 +62,7 @@ case "$1" in
         echo "$COMMAND_NAME is already installed in $INSTALL_DIR"
     else
         sudo ln -s $TARGET $INSTALL_DIR
+        echo "$COMMAND_NAME successfully installed in $INSTALL_DIR"
     fi
     ;;
     uninstall)
