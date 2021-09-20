@@ -19,7 +19,7 @@ case "$1" in
     explorer.exe $url
     ;;
     up)
-    sudo docker-compose up -d $web_server && \
+    docker-compose up -d $web_server && \
     echo "$web_server is running: $url" && \
     explorer.exe $url
     ;;
@@ -33,26 +33,26 @@ case "$1" in
     # Service commands:
     composer)
     shift
-    sudo docker-compose run --rm php composer "$@"
+    docker-compose run --rm php composer "$@"
     ;;
     artisan)
     shift
-    sudo docker-compose run --rm php php artisan "$@"
+    docker-compose run --rm php php artisan "$@"
     ;;
     php) shift
-    sudo docker-compose run --rm php "$@"
+    docker-compose run --rm php "$@"
     ;;
     phpunit)
     shift
-    sudo docker-compose run --rm phpunit "$@"
+    docker-compose run --rm phpunit "$@"
     ;;
     npm)
     shift
-    sudo docker-compose run --rm npm "$@"
+    docker-compose run --rm npm "$@"
     ;;
     shell)
     shift
-    sudo docker-compose run --rm $1 /bin/sh
+    docker-compose run --rm $1 /bin/sh
     ;;
 
     # Other commands:
