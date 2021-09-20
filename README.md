@@ -16,14 +16,14 @@ Make sure to **clone this project into a WSL directory** for vastly improved per
 
 FYI these were the commands that ran during the setup:
 
+    # Create Laravel's environment file:
+    coma env
+
     # Build and spin up the web server and its dependent containers:
     coma build
 
     # Install PHP dependencies:
     coma composer install
-
-    # Create Laravel's environment file:
-    coma env
 
     # Install JS dependencies:
     coma npm install
