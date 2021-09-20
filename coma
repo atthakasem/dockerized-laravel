@@ -92,26 +92,26 @@ case "$1" in
 
     # Default command:
     *) echo "Container commands:
-    build           - (Re)build and start the web server image and its dependents
-    up              - Start the web server container and its dependents
-    down            - Shut down all containers without removing them
-    remove          - Shut down all containers and remove them
-    ps              - List running containers
+    build       (Re)build and start the web server image and its dependents
+    up          Start the web server container and its dependents
+    down        Shut down all containers without removing them
+    remove      Shut down all containers and remove them
+    ps          List running containers
 
 Service commands:
-    composer        - Run the PHP container and call composer
-    artisan         - Run the PHP container and call artisan
-    php             - Run the PHP container
-    phpunit         - Run the PHPUnit container
-    npm             - Run the npm container
-    shell [SERVICE] - Open the shell of a container
+    composer            Run the PHP container and call composer
+    artisan             Run the PHP container and call artisan
+    php                 Run the PHP container
+    phpunit             Run the PHPUnit container
+    npm                 Run the npm container
+    shell [SERVICE]     Open the shell of a container
 
 Other commands:
-    link        - Create a $command_name symlink in /usr/local/bin/
-    unlink      - Delete the $command_name symlink from the machine
-    setup       - Set up the dev environment by starting containers and installing dependencies
-    env         - Create .env from .env.example and generate an app key
-    uds         - Switch to PHP-FPM Unix socket connection
-    tcp         - Switch to PHP-FPM TCP connection"
+    link        Create a $command_name symlink in /usr/local/bin/
+    unlink      Delete the $command_name symlink from the machine
+    setup       Set up the dev environment by starting containers and installing dependencies
+    env         Create .env from .env.example and generate an app key
+    uds         Switch to PHP-FPM Unix socket connection
+    tcp         Switch to PHP-FPM TCP connection"
     ;;
 esac
